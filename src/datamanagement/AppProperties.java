@@ -5,7 +5,8 @@ public class AppProperties {
 private static AppProperties self = null;
 private Properties properties;
 
-public static AppProperties getInstance() {
+public static AppProperties getInstance() //class name Appproperties
+{
 if (self == null ) { self = new AppProperties(); } return self;}
 private AppProperties() {properties = new Properties();
 try {properties.load(new FileInputStream("Properties.prop"));} 
