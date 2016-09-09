@@ -1,4 +1,8 @@
 package datamanagement;
+/**
+Interface for IStudentUnitRecord  which will several  methods for setting and getting assignment mark calculating total 
+**/
+
 
 public interface IStudentUnitRecord 
 {
