@@ -9,7 +9,10 @@ public class cgCTL {
 
 	public cgCTL() {
 	}
-
+/**
+ *
+ * @author Prakash
+ */
 	public void execute() {
 		CGUI = new cgUI(this);
 		CGUI.setState1(false);
@@ -26,7 +29,10 @@ public class cgCTL {
 		CGUI.setVisible(true);
 		CGUI.setState1(true);
 	}
-
+    /**@param
+     * 
+     * @param code get unique code and check if it exist in db else it will create new student list 
+     */
 	public void unitSelected(String code) {
 
 		if (code.equals("NONE"))
@@ -64,7 +70,13 @@ public class cgCTL {
 
 		}
 	}
-
+/**@param
+ * 
+ * @param f get current marks for grade check
+ * @param g get current marks for grade check
+ * @param h get current marks for grade check
+ * @return 
+ */
 	public String checkGrade(float f, float g, float h) {
 		IUnit u = UnitManager.UM().getUnit(cuc);
 		String s = u.getGrade(f, g, h);
@@ -82,7 +94,12 @@ public class cgCTL {
 		CGUI.setState5(true);
 		changed = true;
 	}
-
+    /**@param
+     * 
+     * @param asg1 get new mark for assignment 1
+     * @param asg2 get new mark for assignment 1
+     * @param exam get new mark for final exam
+     */
 	public void saveGrade(float asg1, float asg2, float exam) {
 
 		IUnit u = UnitManager.UM().getUnit(cuc);
