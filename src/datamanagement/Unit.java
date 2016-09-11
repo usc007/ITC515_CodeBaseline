@@ -1,176 +1,288 @@
 package datamanagement;
 
+/**
+ *
+ * @author Prakash
+ */
+
+/**
+* 
+* This class represents a unit.
+*/
 public class Unit implements IUnit {
-	private String uc;
-	private String UN;
-	private float co2;
-	private float co1;
-	private float co4;
-	private float co3;
-	private float co5;
-	private int a1, a2, ex;
-	
-	private StudentUnitRecordList rs;
 
-	public Unit(String UC, String un, float f1, float f2, float f3, float f4,
-			float f5, int i1, int i2, int i3, StudentUnitRecordList rl) {
+    private String unitCode;
+    private String unitName;
+    private float passCutOffPoint;
+    private float creditCutOffPoint;
+    private float distinctionCutOffPoint;
+    private float highDistinctionCutOffPoint;
+    private float additionalExamCutOffPoint;
+    private int assignment1Weight, assignment2Weight, examWeight;
+    private StudentUnitRecordList recordList;
 
-		uc = UC;
-		UN = un;
-		co2 = f1;
-		co1 = f2;
-		this.co4 = f3;
-		co3 = f4;
-		this.co5 = f5;
-		this.setAssessmentWeights(i1, i2, i3);
-		rs = rl == null ? new StudentUnitRecordList() : rl;
-	}
+    /**
+     * Constructor of the Student class
+     *
+     * @param unitCode           the unit code of a unit
+     * @param unitName           the unit name of a unit
+     * @param pass               cut off point for pass
+     * @param credit             cut off point for credit
+     * @param distinction        cut off point for distinction
+     * @param highDistinction     cut off point for high distinction
+     * @param additionalExam     cut off point for additional exam
+     * @param assignment1Weight  assignment 1 weight
+     * @param assignment2Weight  assignment 2 weight
+     * @param examWeight         exam weight
+     * @param rl                 student record list
+     */    
+    public Unit(String unitCode, String unitName, float pass, float credit, float distinction, 
+            float highDistinction, float additionalExam, 
+            int assignment1Weight, int assignment2Weight, int examWeight, StudentUnitRecordList rl) {
 
-	public String getUnitCode() {
-		return this.uc;
-	}
+        this.unitCode = unitCode;
+        this.unitName = unitName;
+        this.passCutOffPoint = pass;
+        this.creditCutOffPoint = credit;
+        this.distinctionCutOffPoint = distinction;
+        this.highDistinctionCutOffPoint = highDistinction;
+        this.additionalExamCutOffPoint = additionalExam;
+        this.setAssessmentWeights(assignment1Weight, assignment2Weight, examWeight);
+        this.recordList = rl == null ? new StudentUnitRecordList() : rl;
+    }
 
-	public String getUnitName() {
+    /**
+    * getter method for unit code
+    */    
+    public String getUnitCode() {
+        return this.unitCode;
+    }
 
-		return this.UN;
-	}
+    /**
+    * getter method for unit name
+    */    
+    public String getUnitName() {
+        return this.unitName;
+    }
 
-	public void setPsCutoff1(float cutoff) {
-		this.co2 = cutoff;
-	}
+    /**
+    * setter method for pass cut off point
+    */    
+    public void setPsCutoff1(float cutoff) {
+        this.passCutOffPoint = cutoff;
+    }
 
-	public float getPsCutoff() {
-		return this.co2;
-	}
+    /**
+    * getter method for pass cut off point
+    */    
+    public float getPsCutoff() {
+        return this.passCutOffPoint;
+    }
 
-	public void setCrCutoff(float cutoff) {
-		this.co1 = cutoff;
-	}
+    /**
+    * setter method for credit cut off point
+    */        
+    public void setCrCutoff(float cutoff) {
+        this.creditCutOffPoint = cutoff;
+    }
 
-	public float getCrCutoff() {
-		return this.co1;
-	}
+    /**
+    * getter method for credit cut off point
+    */        
+    public float getCrCutoff() {
+        return this.creditCutOffPoint;
+    }
 
-	public void setDiCutoff(float cutoff) {
-		this.co4 = cutoff;
-	}
+    /**
+    * setter method for distinction cut off point
+    */        
+    public void setDiCutoff(float cutoff) {
+        this.distinctionCutOffPoint = cutoff;
+    }
 
-	public float getDiCuttoff() {
-		return this.co4;
-	}
+    /**
+    * getter method for distinction cut off point
+    */        
+    public float getDiCuttoff() {
+        return this.distinctionCutOffPoint;
+    }
 
-	public void HDCutoff(float cutoff) {
-		this.co3 = cutoff;
-	}
+    /**
+    * setter method for high distinction cut off point
+    */        
+    public void setHdCutoff(float cutoff) {
+        this.highDistinctionCutOffPoint = cutoff;
+    }
 
-	public void setHdCutoff(float cutoff) {
-		this.co3 = cutoff;
-	}
+    /**
+    * getter method for high distinction cut off point
+    */      
+    public float getHdCutoff() {
+        return this.highDistinctionCutOffPoint;
 
-	public float getHdCutoff() {
-		return this.co3;
+    }
 
-	}
+    /**
+    * setter method for additional exam cut off point
+    */        
+    public void setAeCutoff(float cutoff) {
+        this.additionalExamCutOffPoint = cutoff;
+    }
 
-	public void setAeCutoff(float cutoff) {
-		this.co5 = cutoff;
-	}
+    /**
+    * getter method for additional exam cut off point
+    */      
+    public float getAeCutoff() {
+        return this.additionalExamCutOffPoint;
+    }
 
-	public float getAeCutoff() {
-		return this.co5;
-	}
+    /**
+    * add a student record
+    * 
+    * @param record a student record
+    */        
+    public void addStudentRecord(IStudentUnitRecord record) {
+        recordList.add(record);
+    }
 
-	public void addStudentRecord(IStudentUnitRecord record) {
-		rs.add(record);
-	}
+    /**
+    * get a student record
+    * 
+    * @param studentID a student ID
+    */        
+    public IStudentUnitRecord getStudentRecord(int studentID) {
+        // return the student record if the student id is in the record
+        for (IStudentUnitRecord r : recordList) {
+            if (r.getStudentID() == studentID) {
+                return r;
+            }
+        }
+        return null;
+    }
 
-	public IStudentUnitRecord getStudentRecord(int studentID) {
-		for (IStudentUnitRecord r : rs) {
-			if (r.getStudentID() == studentID)
-				return r;
-		}
-		return null;
-	}
+    /**
+    * get the student records
+    */        
+    public StudentUnitRecordList listStudentRecords() {
+        return recordList;
+    }
 
-	public StudentUnitRecordList listStudentRecords() {
-		return rs;
-	}
+    /**
+    * get the assignment 1 weight
+    */       
+    @Override
+    public int getAsg1Weight() {
+        return assignment1Weight;
+    }
 
-	@Override
-	public int getAsg1Weight() {
-		return a1;
-	}
+    /**
+    * get the assignment 2 weight
+    */       
+    @Override
+    public int getAsg2Weight() {
+        return assignment2Weight;
+    }
 
-	@Override
-	public int getAsg2Weight() {
-		return a2;
-	}
+    /**
+    * get the exam weight
+    */       
+    @Override
+    public int getExamWeight() {
+        return examWeight;
+    }
 
-	@Override
-	public int getExamWeight() {
-		return ex;
-	}
+    /**
+    * set the assessment weight
+    * 
+    * @param a1 assignment 1 mark
+    * @param a2 assignment 2 mark
+    * @param ex exam mark
+    */       
+    @Override
+    public void setAssessmentWeights(int a1, int a2, int ex) {
+        // check if the marks are within 0 - 100
+        if (a1 < 0 || a1 > 100 || 
+            a2 < 0 || a2 > 100 || 
+            ex < 0 || ex > 100) {
+            throw new RuntimeException("Assessment weights cant be less than zero or greater than 100");
+        }
+        
+        // check if assignment 1, assignment 2 and exam adds up to a total of 100
+        if (a1 + a2 + ex != 100) {
+            throw new RuntimeException("Assessment weights must add to 100");
+        }
+        
+        // set the weights
+        this.assignment1Weight = a1;
+        this.assignment2Weight = a2;
+        this.examWeight = ex;
+    }
 
-	@Override
-	public void setAssessmentWeights(int a1, int a2, int ex) {
-		if (a1 < 0 || a1 > 100 ||
-			a2 < 0 || a2 > 100 ||
-			ex < 0 || ex > 100 ) {
-			throw new RuntimeException("Assessment weights cant be less than zero or greater than 100");
-		}			
-		if (a1 + a2 + ex != 100) {
-			throw new RuntimeException("Assessment weights must add to 100");
-		}
-		this.a1 = a1;
-		this.a2 = a2;
-		this.ex = ex;			
-	}
-	
-	private void setCutoffs( float ps, float cr, float di, float hd, float ae) {
-		if (ps < 0 || ps > 100 ||
-			cr < 0 || cr > 100 ||
-			di < 0 || di > 100 ||
-			hd < 0 || hd > 100 ||
-			ae < 0 || ae > 100 ) {
-			throw new RuntimeException("Assessment cutoffs cant be less than zero or greater than 100");
-		}
-		if (ae >= ps) {
-			throw new RuntimeException("AE cutoff must be less than PS cutoff");
-		}
-		if (ps >= cr) {
-			throw new RuntimeException("PS cutoff must be less than CR cutoff");
-		}
-		if (cr >= di) {
-			throw new RuntimeException("CR cutoff must be less than DI cutoff");
-		}
-		if (di >= hd) {
-			throw new RuntimeException("DI cutoff must be less than HD cutoff");
-		}
+    /**
+    * set the cut off points
+    * 
+    * @param ps cut off point for pass
+    * @param cr cut off point for credit
+    * @param di cut off point for distinction
+    * @param hd cut off point for high distinction
+    * @param ae cut off point for additional exam
+    */       
+    private void setCutoffs(float ps, float cr, float di, float hd, float ae) {
+        // check if the marks are within 0 - 100
+        if (ps < 0 || ps > 100 || 
+            cr < 0 || cr > 100 || 
+            di < 0 || di > 100 ||
+            hd < 0 || hd > 100 ||
+            ae < 0 || ae > 100) {
+            throw new RuntimeException("Assessment cutoffs cant be less than zero or greater than 100");
+        }
+        
+        // check if the cut off marks are legitimate
+        if (ae >= ps) {
+            throw new RuntimeException("AE cutoff must be less than PS cutoff");
+        }
+        if (ps >= cr) {
+            throw new RuntimeException("PS cutoff must be less than CR cutoff");
+        }
+        if (cr >= di) {
+            throw new RuntimeException("CR cutoff must be less than DI cutoff");
+        }
+        if (di >= hd) {
+            throw new RuntimeException("DI cutoff must be less than HD cutoff");
+        }
 
-	}
-	
-	public String getGrade(float f1, float f2, float f3) {
-		float t = f1 + f2 + f3;
-		
-		if (f1 < 0 || f1 > a1 ||
-			f2 < 0 || f2 > a2 ||
-			f3 < 0 || f3 > ex ) {
-			throw new RuntimeException("marks cannot be less than zero or greater than assessment weights");
-		}
+    }
 
-		if (t < co5) {
-			return "FL";
-		} else if (t < co2)
-			return "AE";
-		else if (t < co1)
-			return "PS";
-		else if (t < co4)
-			return "CR";
-		else if (t < co3)
-			return "DI";
-		else
-			return "HD";
-	}
+    /**
+    * get the grade
+    * 
+    * @param a1 assignment 1 mark
+    * @param a2 assignment 2 mark
+    * @param ex exam mark
+    */   
+    public String getGrade(float a1, float a2, float ex) {
+        float total = a1 + a2 + ex;
 
-	
+        if (a1 < 0 || a1 > assignment1Weight || 
+            a2 < 0 || a2 > assignment2Weight || 
+            ex < 0 || ex > examWeight) {
+            throw new RuntimeException("marks cannot be less than zero or greater than assessment weights");
+        }
+
+        // calculate the grade
+        if (total < additionalExamCutOffPoint) {
+            return "FL";
+        } else if (total < passCutOffPoint) {
+            return "AE";
+        } else if (total < creditCutOffPoint) {
+            return "PS";
+        } else if (total < distinctionCutOffPoint) {
+            return "CR";
+        } else if (total < highDistinctionCutOffPoint) {
+            return "DI";
+        } else {
+            return "HD";
+        }
+    }
+
 }
