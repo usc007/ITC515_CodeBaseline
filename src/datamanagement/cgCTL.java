@@ -1,5 +1,8 @@
 package datamanagement;
-
+/**
+ *
+ * @author Prakash
+ */
 public class cgCTL {
 
 	cgUI CGUI;
@@ -9,10 +12,7 @@ public class cgCTL {
 
 	public cgCTL() {
 	}
-/**
- *
- * @author Prakash
- */
+
 	public void execute() {
 		CGUI = new cgUI(this);
 		CGUI.setState1(false);
