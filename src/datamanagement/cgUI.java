@@ -7,7 +7,10 @@ import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-
+/**
+ *
+ * @author Prakash
+ */
 public class cgUI extends javax.swing.JFrame implements IUnitLister,
 		IStudentLister {
 	private cgCTL ctl;
