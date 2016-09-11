@@ -1,7 +1,14 @@
 package datamanagement;
+/**
+ *
+ * @author KishanTamang
+ */
 public class Main
 {
-    public static void main(String[] p) {new cgCTL().execute();
-        
-}   
-    }
+    /**
+    * @param p the command line arguments
+    */
+    public static void main(String[] p) {
+        new cgCTL().execute();
+    }   
+}
