@@ -299,7 +299,12 @@ public class cgUI extends javax.swing.JFrame implements IUnitLister,
 
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
-
+	
+	/**@param  cU  get the value for JComboBox1
+ * @param  evt the event of the interest
+ * @return      
+ */
+	
 	private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {// GEN-FIRST:event_jComboBox1ItemStateChanged
 		String cU = (String) jComboBox1.getSelectedItem();
 		Refresh3();
